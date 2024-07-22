@@ -1,0 +1,143 @@
+# 네임스페이스 생성 매니페스트
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: alerting
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: logging
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jaeger
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: policy
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loadtest
+---
+# 전체 manifests 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-repo
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-alerting 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-alerting
+  namespace: argocd
+spec:
+  destination:
+    namespace: alerting
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-alerting
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-jaeger 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-jaeger
+  namespace: argocd
+spec:
+  destination:
+    namespace: jaeger
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-jaeger
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-monitoring 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-monitoring
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-monitoring
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-policy 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-policy
+  namespace: argocd
+spec:
+  destination:
+    namespace: policy
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-policy
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-logging 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-logging
+  namespace: argocd
+spec:
+  destination:
+    namespace: logging
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-logging
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+---
+# manifests-loadtest 디렉터리
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests-loadtest
+  namespace: argocd
+spec:
+  destination:
+    namespace: loadtest
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy/kubernetes/manifests-loadtest
+    repoURL: 'https://github.com/KSEUNGJ/Infra-repo.git'
+    targetRevision: HEAD
+  project: default
+

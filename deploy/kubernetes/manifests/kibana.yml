@@ -2,39 +2,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: elasticsearch
+  name: kibana
   labels:
-    name: elasticsearch
+    app: kibana
   namespace: kube-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: elasticsearch
+      app: kibana
   template:
     metadata:
       labels:
-        name: elasticsearch
+        app: kibana
     spec:
       containers:
-       - image: elasticsearch
-         name: elasticsearch
-         ports:
-          - name: elasticsearch
-            containerPort: 9200
+      - name: kibana
+        image: kibana:7.10.1
+        ports:
+        - containerPort: 5601
+          name: http
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: elasticsearch
+  name: kibana
   labels:
-    name: elasticsearch
+    app: kibana
   namespace: kube-system
 spec:
   ports:
-  - port: 9200
-    targetPort: 9200
+  - port: 5601
+    targetPort: 5601
+    protocol: TCP
+    name: http
   selector:
-    name: elasticsearch
+    app: kibana
