@@ -7,8 +7,14 @@ data:
   alertmanager.yml: |
     global:
       resolve_timeout: 5m
-      slack_api_url: 'https://hooks.slack.com/services/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'
+      slack_api_url: ${SLACK_HOOK_URL}
     route:
+      group_by: [cluster]
+      receiver: slack-all
+      routes:
+        - match:
+            severity: slack
+          receiver: slack-all
       receiver: slack-notifications
     receivers:
       - name: slack-notifications
@@ -17,4 +23,16 @@ data:
             channel: '#alerts'
             title: "{{ template \"slack.common.title\" . }}"
             text: "{{ template \"slack.common.text\" . }}"
+      - name: 'slack-all'
+        slack_configs:
+        - channel: '#sockshop-ops'
+          send_resolved: true
+          title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+          text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+  configure_secret.sh: |
+    #!/bin/sh
+    echo 'Configuring Slack hook url.'
+    sed -i "s#\${SLACK_HOOK_URL}#$SLACK_HOOK_URL#g" /etc/alertmanager/config.yml
+    cat /etc/alertmanager/config.yml  # 디버깅용
+    exec /bin/alertmanager "$@"
 
