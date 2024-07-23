@@ -1,10 +1,25 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: fluentd
+  name: fluentd-role
 rules:
 - apiGroups: [""]
-  resources: ["pods", "namespaces"]
+  resources:
+  - pods
+  - namespaces
   verbs: ["get", "list", "watch"]
----
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/stats
+  - nodes/proxy
+  - nodes/metrics
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources:
+  - events
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["logging.openshift.io"]
+  resources:
+  - "*"
+  verbs: ["create", "get", "list", "watch"]    
