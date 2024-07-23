@@ -163,3 +163,46 @@ data:
       - source_labels: [__meta_kubernetes_endpoints_name]
         regex: 'node-exporter'
         action: keep
+    - job_name: 'carts'
+      static_configs:
+        - targets: ['10.233.102.169:80']
+    - job_name: 'carts-db'
+      static_configs:
+        - targets: ['10.233.102.167:27017']
+    - job_name: 'catalogue'
+      static_configs:
+        - targets: ['10.233.102.174:80']
+    - job_name: 'catalogue-db'
+      static_configs:
+        - targets: ['10.233.75.57:3306']
+    - job_name: 'front-end'
+      static_configs:
+        - targets: ['10.233.97.152:8079']
+    - job_name: 'orders'
+      static_configs:
+        - targets: ['10.233.102.171:80']
+    - job_name: 'orders-db'
+      static_configs:
+        - targets: ['10.233.102.166:27017']
+    - job_name: 'payment'
+      static_configs:
+        - targets: ['10.233.75.63:80']
+    - job_name: 'queue-master'
+      static_configs:
+        - targets: ['10.233.75.58:80']
+    - job_name: 'rabbitmq'
+      static_configs:
+        - targets: ['10.233.97.151:9090']
+    - job_name: 'session-db'
+      static_configs:
+        - targets: ['10.233.75.60:6379']
+    - job_name: 'shipping'
+      static_configs:
+        - targets: ['10.233.102.168:80']
+    - job_name: 'user'
+      static_configs:
+        - targets: ['10.233.102.173:80']
+    - job_name: 'user-db'
+      static_configs:
+        - targets: ['10.233.75.56:27017']
+
