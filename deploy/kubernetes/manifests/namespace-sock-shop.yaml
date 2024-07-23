@@ -1,0 +1,6 @@
+# 경로: deploy/kubernetes/manifests/namespace-sock-shop.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sock-shop
+
