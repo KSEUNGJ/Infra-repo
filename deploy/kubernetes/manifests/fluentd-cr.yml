@@ -22,4 +22,4 @@ rules:
 - apiGroups: ["logging.openshift.io"]
   resources:
   - "*"
-  verbs: ["create", "get", "list", "watch"]    
+  verbs: ["create", "get", "list", "watch"]
