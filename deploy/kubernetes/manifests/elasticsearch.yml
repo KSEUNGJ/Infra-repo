@@ -17,12 +17,23 @@ spec:
     spec:
       containers:
       - name: elasticsearch
-        image: elasticsearch:7.10.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
         ports:
         - containerPort: 9200
           name: http
         - containerPort: 9300
           name: transport
+        env:
+        - name: discovery.type
+          value: "single-node"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          subPath: elasticsearch.yml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: elasticsearch-config
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---

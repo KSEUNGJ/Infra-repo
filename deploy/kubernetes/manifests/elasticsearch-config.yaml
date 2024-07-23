@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-config
+  namespace: kube-system
+data:
+  elasticsearch.yml: |
+    cluster.name: "docker-cluster"
+    network.host: 0.0.0.0
+    discovery.seed_hosts: ["elasticsearch"]
+    cluster.initial_master_nodes: ["elasticsearch"]
+
