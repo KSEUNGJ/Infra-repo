@@ -163,3 +163,13 @@ data:
       - source_labels: [__meta_kubernetes_endpoints_name]
         regex: 'node-exporter'
         action: keep
+    - job_name: 'sock-shop'
+      static_configs:
+        - targets: 
+          - '10.98.173.216:80'    # carts
+          - '10.102.214.237:80'   # catalogue
+          - '10.105.239.211:80'   # orders
+          - '10.96.93.183:80'     # payment
+          - '10.105.199.118:80'   # shipping
+          - '10.101.112.186:80'   # user
+          - '10.106.171.156:80'   # front-end
