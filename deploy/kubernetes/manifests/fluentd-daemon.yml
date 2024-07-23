@@ -15,7 +15,7 @@ spec:
       serviceAccountName: fluentd
       containers:
       - name: fluentd
-        image: quay.io/fluent/fluentd-kubernetes-daemonset:v1.14.4-debian-1.0
+        image: quay.io/fluentd_elasticsearch/fluentd:v3.1.0
         env:
         - name: FLUENT_ELASTICSEARCH_HOST
           value: "elasticsearch-logging"
