@@ -7,7 +7,7 @@ data:
   prometheus.yml: |
     global:
       scrape_interval: 15s
-      scrape_timeout: 30s  # 타임아웃 시간을 늘립니다.
+      scrape_timeout: 10s  # 타임아웃 시간을 늘립니다.
     rule_files:
       - "/etc/prometheus-rules/alert.rules"
     alerting:
