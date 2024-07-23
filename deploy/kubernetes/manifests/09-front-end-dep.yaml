@@ -40,4 +40,6 @@ spec:
         env:
         - name: SESSION_REDIS
           value: "true"
+        - name: API_URL
+          value: "http://sock-shop/api"  # 여기에 API_URL 추가
 
